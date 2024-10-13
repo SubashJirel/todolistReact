@@ -137,6 +137,7 @@ function App() {
       />
       <MainPanel
         tasks={filteredTasks}
+        projectsList={projectsList}
         setProjectsList={setProjectsList}
         selectedProject={typeof selectedView === 'number' ? selectedView : null}
       />
