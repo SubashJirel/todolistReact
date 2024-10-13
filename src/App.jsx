@@ -130,8 +130,17 @@ function App() {
   }, [selectedView, projectsList]); // Depend on selectedView and projectsList
   return (
     <div className="todolist-app">
-      <Sidebar setSelectedView={setSelectedView} projectsList={projectsList} />
-      <MainPanel tasks={filteredTasks} setProjectsList={setProjectsList} />
+      <Sidebar
+        setSelectedView={setSelectedView}
+        projectsList={projectsList}
+        setProjectsList={setProjectsList}
+      />
+      <MainPanel
+        tasks={filteredTasks}
+        setProjectsList={setProjectsList}
+        selectedProject={typeof selectedView === 'number' ? selectedView : null}
+      />
+      {/* use of derived state here selectedProject={typeof selectedView === 'number' ? selectedView : null}*/}
     </div>
   );
 }
