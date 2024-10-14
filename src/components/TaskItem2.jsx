@@ -1,21 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
 import TaskForm from './TaskForm';
-const TaskItem2 = ({ task, setProjectsList, handleDeleteTask }) => {
+const TaskItem2 = ({
+  task,
+  projectsList,
+  setProjectsList,
+  handleDeleteTask,
+}) => {
   const [newTask, setNewTask] = useState(task);
   const [isEditingTask, setIsEditingTask] = useState(false);
-  const [editingTaskIndex, setEditingTaskIndex] = useState(null);
   const handleEditTask = (projectIndex, taskIndex) => {
-    // const taskToEdit = projectsList[projectIndex].tasks[taskIndex]; // fix this tomorrow
-    // setNewTask(taskToEdit);
-    // setEditingTaskIndex(taskIndex);
+    const taskToEdit = projectsList[projectIndex].tasks[taskIndex]; // fix this tomorrow
+    // console.log(taskToEdit);
+    setNewTask(taskToEdit);
     setIsEditingTask(true);
   };
-  const saveEditedTask = () => {
+  const saveEditedTask = (projIdx, taskIdx) => {
     setProjectsList((prev) => {
       const updatedProjects = [...prev];
-      const taskIndex = editingTaskIndex;
-      const projectIndex = selectedProject;
+      const taskIndex = taskIdx;
+      const projectIndex = projIdx;
       updatedProjects[projectIndex].tasks[taskIndex] = newTask;
       return updatedProjects;
     });
@@ -35,7 +39,9 @@ const TaskItem2 = ({ task, setProjectsList, handleDeleteTask }) => {
           newTask={newTask}
           setNewTask={setNewTask}
           setIsAddingTask={setIsEditingTask}
-          handleAddTask={saveEditedTask}
+          handleAddTask={() =>
+            saveEditedTask(task.projectIndex, task.taskIndex)
+          }
         />
       )}
       <button

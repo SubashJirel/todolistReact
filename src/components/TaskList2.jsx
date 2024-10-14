@@ -17,7 +17,7 @@ const TaskList2 = ({ tasks, projectsList, setProjectsList }) => {
           key={index}
           task={task}
           handleDeleteTask={handleDeleteTask}
-          ProjectsList={projectsList}
+          projectsList={projectsList}
           setProjectsList={setProjectsList}
         />
       ))}
