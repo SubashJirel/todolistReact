@@ -14,22 +14,40 @@ const TaskItem2 = ({
   const [newTask, setNewTask] = useState(task);
   const [isEditingTask, setIsEditingTask] = useState(false);
   const handleEditTask = (projectIndex, taskIndex) => {
-    const taskToEdit = projectsList[projectIndex].tasks[taskIndex]; // fix this tomorrow
+    // const taskToEdit = projectsList[projectIndex].tasks[taskIndex]; // fix this tomorrow
+    const project = projectsList.find(
+      (project) => project.projectIndex === projectIndex
+    );
+    if (!project) return;
+
+    const taskToEdit = project.tasks.find(
+      (task) => task.taskIndex === taskIndex
+    );
+    if (!taskToEdit) return; // Safely handle missing task
     // console.log(taskToEdit);
     setNewTask(taskToEdit);
     setIsEditingTask(true);
   };
-  const saveEditedTask = (projIdx, taskIdx) => {
-    setProjectsList((prev) => {
-      const updatedProjects = [...prev];
-      const taskIndex = taskIdx;
-      const projectIndex = projIdx;
-      updatedProjects[projectIndex].tasks[taskIndex] = newTask;
-      return updatedProjects;
+
+  const saveEditedTask = (projectId, taskId) => {
+    setProjectsList((prevProjects) => {
+      return prevProjects.map((project) => {
+        if (project.projectIndex === projectId) {
+          return {
+            ...project,
+            tasks: project.tasks.map((task) =>
+              task.taskIndex === taskId ? { ...task, ...newTask } : task
+            ),
+          };
+        }
+        return project;
+      });
     });
+
     setIsEditingTask(false);
     setNewTask({ title: '', description: '', date: '' });
   };
+
   return (
     <div
       className={`task-item flex justify-between ${
