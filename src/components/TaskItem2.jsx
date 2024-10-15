@@ -1,11 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import TaskForm from './TaskForm';
+// import { Trash-2 } from 'lucide-react';
+import { Trash2, Pencil } from 'lucide-react';
 const TaskItem2 = ({
   task,
   projectsList,
   setProjectsList,
   handleDeleteTask,
+  projectIndex,
+  taskIndex,
 }) => {
   const [newTask, setNewTask] = useState(task);
   const [isEditingTask, setIsEditingTask] = useState(false);
@@ -27,28 +31,36 @@ const TaskItem2 = ({
     setNewTask({ title: '', description: '', date: '' });
   };
   return (
-    <div className={`task-item ${task.completed ? 'completed' : ''}`}>
-      <h4>{task.title}</h4>
-      <p>{task.description}</p>
-      <span>{task.date}</span>
-      <button onClick={() => handleEditTask(task.projectIndex, task.taskIndex)}>
-        Edit
-      </button>
+    <div
+      className={`task-item flex justify-between ${
+        task.completed ? 'completed' : ''
+      }`}
+    >
+      <div className="flex flex-col ">
+        <h4>{task.title}</h4>
+        <p>{task.description}</p>
+      </div>
+      <div className="flex">
+        <span>{task.date}</span>
+        <button onClick={() => handleEditTask(projectIndex, taskIndex)}>
+          Edit
+          <Pencil />
+        </button>
+        <button>
+          <Trash2
+            className="cursor-pointer"
+            onClick={() => handleDeleteTask(projectIndex, taskIndex)}
+          />
+        </button>
+      </div>
       {isEditingTask && (
         <TaskForm
           newTask={newTask}
           setNewTask={setNewTask}
           setIsAddingTask={setIsEditingTask}
-          handleAddTask={() =>
-            saveEditedTask(task.projectIndex, task.taskIndex)
-          }
+          handleAddTask={() => saveEditedTask(projectIndex, taskIndex)}
         />
       )}
-      <button
-        onClick={() => handleDeleteTask(task.projectIndex, task.taskIndex)}
-      >
-        Delete
-      </button>
     </div>
   );
 };

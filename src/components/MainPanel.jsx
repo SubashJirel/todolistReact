@@ -2,6 +2,8 @@ import TaskList from './TaskList';
 import { useState } from 'react';
 import TaskForm from './TaskForm';
 import TaskList2 from './TaskList2';
+import uniqid from 'uniqid';
+
 const MainPanel = ({
   tasks,
   projectsList,
@@ -21,15 +23,15 @@ const MainPanel = ({
   const handleAddTask = () => {
     setProjectsList((prevProjects) => {
       return prevProjects.map((project) =>
-        project.projectIndex === selectedProject
+        project.title == selectedProject
           ? {
               ...project,
               tasks: [
                 ...project.tasks,
                 {
                   ...newTask,
-                  taskIndex: project.tasks.length,
-                  projectIndex: selectedProject,
+                  taskIndex: uniqid(),
+                  projectIndex: project.projectIndex,
                 },
               ],
             }
@@ -39,23 +41,7 @@ const MainPanel = ({
     setNewTask({ title: '', description: '', date: '', completed: false });
     setIsAddingTask(false);
   };
-  const handleEditTask = (projectIndex, taskIndex) => {
-    const taskToEdit = projectsList[projectIndex].tasks[taskIndex];
-    setNewTask(taskToEdit);
-    setEditingTaskIndex(taskIndex);
-    setIsEditingTask(true);
-  };
-  const saveEditedTask = () => {
-    setProjectsList((prev) => {
-      const updatedProjects = [...prev];
-      const taskIndex = editingTaskIndex;
-      const projectIndex = selectedProject;
-      updatedProjects[projectIndex].tasks[taskIndex] = newTask;
-      return updatedProjects;
-    });
-    setIsEditingTask(false);
-    setNewTask({ title: '', description: '', date: '' });
-  };
+
   // const handleDeleteTask = (projectIndex, taskIndex) => {
   //   setProjectsList((prev) => {
   //     const updatedProjects = [...prev];

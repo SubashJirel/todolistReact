@@ -1,13 +1,14 @@
 import './sidebar.css';
 import { useState } from 'react';
+import uniqid from 'uniqid';
 const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
   const [isAddingProject, setIsAddingProject] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
 
-  function handleAddProject(projIndex) {
+  function handleAddProject() {
     let newProject = {
       title: newProjectName,
-      projectIndex: projIndex,
+      projectIndex: uniqid(),
       tasks: [],
     };
     setProjectsList((prev) => [...prev, newProject]);
@@ -25,7 +26,7 @@ const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
       <div className="projects-section tasks-sidebar">
         <h3>Projects</h3>
         {projectsList.map((project, index) => (
-          <button key={index} onClick={() => setSelectedView(index)}>
+          <button key={index} onClick={() => setSelectedView(project.title)}>
             {project.title}
           </button>
         ))}
@@ -40,9 +41,7 @@ const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
               onChange={(e) => setNewProjectName(e.target.value)}
             />
             <div>
-              <button onClick={() => handleAddProject(projectsList.length)}>
-                Add
-              </button>
+              <button onClick={() => handleAddProject()}>Add</button>
               <button onClick={() => setIsAddingProject(false)}>Cancel</button>
             </div>
           </div>

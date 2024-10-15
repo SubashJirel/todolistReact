@@ -92,13 +92,10 @@ function App() {
             tasks.push(task);
           } else if (selectedView === 'week' && isThisWeek(taskDate)) {
             tasks.push(task);
-          } else if (
-            typeof selectedView === 'number' &&
-            selectedView == task.projectIndex
-          ) {
+          } else if (selectedView === project.title) {
             // console.log('This is trueeee');
             // console.log(selectedView);
-            // console.log(task.projectIndex);
+            // console.log(project.title);
             tasks.push(task);
           }
         });
@@ -119,7 +116,7 @@ function App() {
         tasks={filteredTasks}
         projectsList={projectsList}
         setProjectsList={setProjectsList}
-        selectedProject={typeof selectedView === 'number' ? selectedView : null}
+        selectedProject={selectedView}
       />
     </div>
   );

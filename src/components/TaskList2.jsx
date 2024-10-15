@@ -2,12 +2,17 @@ import TaskItem from './TaskItem';
 import TaskItem2 from './TaskItem2';
 import { useState } from 'react';
 const TaskList2 = ({ tasks, projectsList, setProjectsList }) => {
-  const handleDeleteTask = (projectIndex, taskIndex) => {
-    setProjectsList((prev) => {
-      const updatedProjects = [...prev];
-      updatedProjects[projectIndex].tasks.splice(taskIndex, 1);
-      return updatedProjects;
-    });
+  const handleDeleteTask = (projectId, taskId) => {
+    setProjectsList((prevProjects) =>
+      prevProjects.map((project) =>
+        project.projectIndex === projectId
+          ? {
+              ...project,
+              tasks: project.tasks.filter((task) => task.taskIndex !== taskId),
+            }
+          : project
+      )
+    );
   };
 
   return (
@@ -16,6 +21,8 @@ const TaskList2 = ({ tasks, projectsList, setProjectsList }) => {
         <TaskItem2
           key={index}
           task={task}
+          projectIndex={task.projectIndex}
+          taskIndex={task.taskIndex}
           handleDeleteTask={handleDeleteTask}
           projectsList={projectsList}
           setProjectsList={setProjectsList}
