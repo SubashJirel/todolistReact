@@ -69,7 +69,7 @@ const MainPanel = ({
       {selectedProject !== null && (
         <>
           {!isAddingTask && (
-            <button onClick={() => setIsAddingTask(true)}>Add New Task</button>
+            <button onClick={() => setIsAddingTask(true)}> Add New Task</button>
           )}
           {isAddingTask && (
             <TaskForm

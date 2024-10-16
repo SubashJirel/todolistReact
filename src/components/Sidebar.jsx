@@ -1,6 +1,7 @@
 import './sidebar.css';
 import { useState } from 'react';
 import uniqid from 'uniqid';
+import { Trash2 } from 'lucide-react';
 const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
   const [isAddingProject, setIsAddingProject] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
@@ -13,6 +14,19 @@ const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
     };
     setProjectsList((prev) => [...prev, newProject]);
     setIsAddingProject(false);
+    setNewProjectName('');
+  }
+  function handleDeleteProject(projectId) {
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this Project?'
+    );
+    if (isConfirmed) {
+      setProjectsList((prevProjects) => {
+        return prevProjects.filter(
+          (project) => project.projectIndex !== projectId
+        );
+      });
+    }
   }
 
   return (
@@ -26,9 +40,15 @@ const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
       <div className="projects-section tasks-sidebar">
         <h3>Projects</h3>
         {projectsList.map((project, index) => (
-          <button key={index} onClick={() => setSelectedView(project.title)}>
-            {project.title}
-          </button>
+          <div key={index} className="flex justify-between items-center">
+            <button onClick={() => setSelectedView(project.title)}>
+              {project.title}
+            </button>
+            <Trash2
+              className="cursor-pointer"
+              onClick={() => handleDeleteProject(project.projectIndex)}
+            />
+          </div>
         ))}
         <button onClick={() => setIsAddingProject(true)}>
           Add New Project

@@ -3,16 +3,23 @@ import TaskItem2 from './TaskItem2';
 import { useState } from 'react';
 const TaskList2 = ({ tasks, projectsList, setProjectsList }) => {
   const handleDeleteTask = (projectId, taskId) => {
-    setProjectsList((prevProjects) =>
-      prevProjects.map((project) =>
-        project.projectIndex === projectId
-          ? {
-              ...project,
-              tasks: project.tasks.filter((task) => task.taskIndex !== taskId),
-            }
-          : project
-      )
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this task?'
     );
+    if (isConfirmed) {
+      setProjectsList((prevProjects) =>
+        prevProjects.map((project) =>
+          project.projectIndex === projectId
+            ? {
+                ...project,
+                tasks: project.tasks.filter(
+                  (task) => task.taskIndex !== taskId
+                ),
+              }
+            : project
+        )
+      );
+    }
   };
 
   return (
