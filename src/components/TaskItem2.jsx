@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import TaskForm from './TaskForm';
 // import { Trash-2 } from 'lucide-react';
-import { Trash2, Pencil } from 'lucide-react';
+import { Trash2, Pencil, Circle, CircleCheck } from 'lucide-react';
 const TaskItem2 = ({
   task,
   projectsList,
@@ -47,16 +47,35 @@ const TaskItem2 = ({
     setIsEditingTask(false);
     setNewTask({ title: '', description: '', date: '' });
   };
-
+  const toggleTaskCompletion = () => {
+    setProjectsList((prevProjects) => {
+      return prevProjects.map((project) => {
+        if (project.projectIndex === projectIndex) {
+          return {
+            ...project,
+            tasks: project.tasks.map((t) =>
+              t.taskIndex === taskIndex ? { ...t, completed: !t.completed } : t
+            ),
+          };
+        }
+        return project;
+      });
+    });
+  };
   return (
     <div
       className={`task-item flex justify-between ${
         task.completed ? 'completed' : ''
       }`}
     >
-      <div className="flex flex-col ">
-        <h4>{task.title}</h4>
-        <p>{task.description}</p>
+      <div className="flex items-center space-x-2">
+        <button onClick={toggleTaskCompletion}>
+          {task.completed ? <CircleCheck /> : <Circle />}
+        </button>
+        <div className="flex flex-col ">
+          <h4>{task.title}</h4>
+          <p>{task.description}</p>
+        </div>
       </div>
       <div className="flex">
         <span>{task.date}</span>
