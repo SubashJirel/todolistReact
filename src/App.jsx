@@ -106,7 +106,7 @@ function App() {
     filterTasks();
   }, [selectedView, projectsList]); // Depend on selectedView and projectsList
   return (
-    <div className="todolist-app border-2 border-red-600">
+    <div className="flex h-screen ">
       <Sidebar
         setSelectedView={setSelectedView}
         projectsList={projectsList}

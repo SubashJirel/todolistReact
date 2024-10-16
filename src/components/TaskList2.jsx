@@ -23,7 +23,7 @@ const TaskList2 = ({ tasks, projectsList, setProjectsList }) => {
   };
 
   return (
-    <div>
+    <div className="p-4 rounded-md shadow-md">
       {tasks.map((task, index) => (
         <TaskItem2
           key={index}

@@ -42,25 +42,8 @@ const MainPanel = ({
     setIsAddingTask(false);
   };
 
-  // const handleDeleteTask = (projectIndex, taskIndex) => {
-  //   setProjectsList((prev) => {
-  //     const updatedProjects = [...prev];
-  //     updatedProjects[projectIndex].tasks.splice(taskIndex, 1);
-  //     return updatedProjects;
-  //   });
-  // };
-
-  // const filteredTasks = projectsList[selectedProject]?.tasks || [];
   return (
-    <div className="main-panel">
-      {/* <TaskList tasks={tasks} setProjectsList={setProjectsList} /> */}
-      {/* <TaskList
-        tasks={tasks}
-        projectIndex={selectedProject}
-        setProjectsList={setProjectsList}
-        handleDeleteTask={handleDeleteTask}
-        handleEditTask={handleEditTask}
-      /> */}
+    <div className="w-3/4  p-4 h-full">
       <TaskList2
         tasks={tasks}
         projectsList={projectsList}
@@ -69,7 +52,13 @@ const MainPanel = ({
       {selectedProject !== null && (
         <>
           {!isAddingTask && (
-            <button onClick={() => setIsAddingTask(true)}> Add New Task</button>
+            <button
+              className="mt-4 bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded"
+              onClick={() => setIsAddingTask(true)}
+            >
+              {' '}
+              Add New Task
+            </button>
           )}
           {isAddingTask && (
             <TaskForm

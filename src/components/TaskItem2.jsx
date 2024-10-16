@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import TaskForm from './TaskForm';
 // import { Trash-2 } from 'lucide-react';
-import { Trash2, Pencil, Circle, CircleCheck } from 'lucide-react';
+import { Trash2, Pencil, Circle, CircleCheckBig } from 'lucide-react';
 const TaskItem2 = ({
   task,
   projectsList,
@@ -68,9 +68,12 @@ const TaskItem2 = ({
         task.completed ? 'completed' : ''
       }`}
     >
-      <div className="flex items-center space-x-2">
-        <button onClick={toggleTaskCompletion}>
-          {task.completed ? <CircleCheck /> : <Circle />}
+      <div className="flex items-center space-x-3">
+        <button
+          className="text-blue-400 hover:text-blue-300"
+          onClick={toggleTaskCompletion}
+        >
+          {task.completed ? <CircleCheckBig /> : <Circle />}
         </button>
         <div className="flex flex-col ">
           <h4>{task.title}</h4>
@@ -79,10 +82,20 @@ const TaskItem2 = ({
       </div>
       <div className="flex">
         <span>{task.date}</span>
-        <button onClick={() => handleEditTask(projectIndex, taskIndex)}>
-          Edit
-          <Pencil />
-        </button>
+        {task.completed && (
+          <button className="cursor-not-allowed">
+            Edit <Pencil />
+          </button>
+        )}
+        {!task.completed && (
+          <button
+            className={`${task.completed}?'cursor-not-allowed':'cursor-pointer'`}
+            onClick={() => handleEditTask(projectIndex, taskIndex)}
+          >
+            Edit
+            <Pencil />
+          </button>
+        )}
         <button>
           <Trash2
             className="cursor-pointer"
