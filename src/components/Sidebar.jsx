@@ -32,7 +32,7 @@ const Sidebar = ({ setSelectedView, projectsList, setProjectsList }) => {
   }
 
   return (
-    <div className="w-1/4 bg-gray-800 p-4 h-full flex flex-col justify-between">
+    <div className="w-64 bg-gray-800 p-4 h-full flex flex-col justify-start">
       <div>
         <h3 className="text-lg font-semibold mb-4">Tasks</h3>
         <button

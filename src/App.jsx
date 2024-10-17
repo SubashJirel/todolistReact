@@ -18,7 +18,7 @@ function App() {
               {
                 title: 'This is a sample task',
                 description: 'some short description',
-                date: '2024-11-11',
+                date: '2024-10-19',
                 projectIndex: 0,
                 taskIndex: 0,
                 completed: false,
@@ -26,7 +26,7 @@ function App() {
               {
                 title: 'This is a completed task',
                 description: 'some short description',
-                date: '2024-11-11',
+                date: '2024-10-17',
                 projectIndex: 0,
                 taskIndex: 1,
                 completed: true,
@@ -40,7 +40,7 @@ function App() {
               {
                 title: 'Do regular home workout',
                 description: 'Just do it',
-                date: '2024-10-12',
+                date: '2024-10-17',
                 projectIndex: 1,
                 taskIndex: 0,
                 completed: false,
@@ -52,9 +52,9 @@ function App() {
             projectIndex: 2,
             tasks: [
               {
-                title: 'Reading Novel',
-                description: 'Read read read',
-                date: '2024-10-12',
+                title: 'Read 1984',
+                description: 'About totalitarianism',
+                date: '2024-10-18',
                 projectIndex: 2,
                 taskIndex: 0,
                 completed: false,
@@ -62,7 +62,7 @@ function App() {
               {
                 title: 'Study data warehouse and data mining',
                 description: 'for machine learning and model training',
-                date: '2024-10-11',
+                date: '2024-10-17',
                 projectIndex: 2,
                 taskIndex: 1,
                 completed: true,
@@ -71,7 +71,7 @@ function App() {
           },
         ];
   });
-  const [selectedView, setSelectedView] = useState('all'); // 'all', 'today', 'week', or project index
+  const [selectedView, setSelectedView] = useState('all'); // 'all', 'today', 'week', or project
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {

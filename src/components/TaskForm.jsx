@@ -12,7 +12,8 @@ function TaskForm({ newTask, setNewTask, setIsAddingTask, handleAddTask }) {
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
           className="w-full mb-3 p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <input
+        <textarea
+          rows={3}
           type="text"
           placeholder="Description"
           value={newTask.description}

@@ -43,33 +43,36 @@ const MainPanel = ({
   };
 
   return (
-    <div className="w-3/4  p-4 h-full">
+    <div className=" p-4 h-full">
       <TaskList2
         tasks={tasks}
         projectsList={projectsList}
         setProjectsList={setProjectsList}
       />
-      {selectedProject !== null && (
-        <>
-          {!isAddingTask && (
-            <button
-              className="mt-4 bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded"
-              onClick={() => setIsAddingTask(true)}
-            >
-              {' '}
-              Add New Task
-            </button>
-          )}
-          {isAddingTask && (
-            <TaskForm
-              newTask={newTask}
-              setNewTask={setNewTask}
-              setIsAddingTask={setIsAddingTask}
-              handleAddTask={handleAddTask}
-            />
-          )}
-        </>
-      )}
+
+      {selectedProject !== 'all' &&
+        selectedProject !== 'today' &&
+        selectedProject !== 'week' && (
+          <>
+            {!isAddingTask && (
+              <button
+                className="mt-4 bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                onClick={() => setIsAddingTask(true)}
+              >
+                {' '}
+                Add New Task
+              </button>
+            )}
+            {isAddingTask && (
+              <TaskForm
+                newTask={newTask}
+                setNewTask={setNewTask}
+                setIsAddingTask={setIsAddingTask}
+                handleAddTask={handleAddTask}
+              />
+            )}
+          </>
+        )}
     </div>
   );
 };
